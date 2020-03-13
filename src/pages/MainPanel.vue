@@ -1,11 +1,11 @@
 <template>
   <q-page class="flex bg-grey-11 ">
-    <div id="container" class="col-xl bg-grey-10 heat-container" @mousedown="drawHeatMap">
+    <div id="container" class="row bg-grey-10 heat-container" @mousedown="drawHeatMap">
       oi
     </div>
-    <div class="col-md">
+    <div class="row">
       <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Necessitatibus nulla commodi possimus eius sunt quibusdam reiciendis omnis vel tenetur pariatur, aspernatur vitae impedit optio veniam tempore explicabo ad, doloribus ut?
+        Lorem
       </p>
     </div>
   </q-page>
@@ -27,13 +27,14 @@ export default {
   mounted () {
     heatmap = heatmapInstance.create({
       "container": document.querySelector(".heat-container"),
-      "radius" : 90,
+      "radius" : 50,
       gradient: {
-        '0.1': '#000000',
-        '0.5': 'orange',
-        '1.0': 'red'
-      },
+        '0.1': '#0096FA',
+        '0.5': '#FAAF00',
+        '1.0': '#FA0000'
+      }
     })
+
     console.log('mounted')
   },
 
@@ -42,7 +43,7 @@ export default {
       heatmap.addData({
         x: e.layerX,
         y: e.layerY,
-        value: 1.9,
+        value: 0.9,
       });
 
       console.log(heatmap)
