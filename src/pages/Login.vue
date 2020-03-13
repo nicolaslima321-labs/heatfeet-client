@@ -1,13 +1,15 @@
 <template>
   <q-page class="flex flex-center">
-    <div class="container">
-      <div>
-        <q-input class="spacing-item" rounded outlined v-model="email" label="Email"/>
-        <q-input class="spacing-item" rounded outlined v-model="password" label="Senha"/>
-        <q-btn class="spacing-item" size="15px" unelevated rounded color="secondary" label="Entrar" /><br>
-        <b>Não possuí cadastro? Clique <a>aqui</a> para se cadastrar</b>
+      <div class="col-xl">
+        <div class="text-h4">
+          HeatFeet
+          <q-badge align="top">beta</q-badge>
+        </div>
+        <q-input class="q-mt-md" rounded outlined v-model="doctor.email" label="Email"/>
+        <q-input class="q-mt-md" rounded outlined v-model="doctor.password" label="Senha"/>
+        <q-btn class="q-mt-md" size="15px" @click="login" unelevated rounded color="secondary" label="Entrar" /><br>
+        <div class="q-mt-sm">Não possuí cadastro? Clique <a style="color: #0000FF;" @click="goToSignUp">aqui</a> para se cadastrar</div>
         <!-- <q-btn size="15px" unelevated rounded color="secondary" label="Cadastre-se" /> -->
-      </div>
     </div>
   </q-page>
 </template>
@@ -18,16 +20,39 @@ export default {
 
   data() {
     return {
-      email: '',
-      password: '',
-      user: false
+      doctor: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+
+  mounted () {
+    this.goToMainPanel()
+  },
+
+  methods: {
+    goToSignUp () {
+      this.$router.push({
+        name: 'sign-up'
+      })
+    },
+
+    goToMainPanel () {
+      this.$router.push({
+        name: 'main'
+      })
+    },
+
+    login () {
+      console.log(this.doctor)
     }
   }
 }
 </script>
 
 <style>
-.container{
+.heat-container{
   display: flex;
   align-content: center;
   align-items: center;
