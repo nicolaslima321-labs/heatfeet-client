@@ -1,12 +1,28 @@
 <template>
   <q-page class="flex bg-grey-11 ">
-    <div id="container" class="row bg-grey-10 heat-container" @mousedown="drawHeatMap">
-      oi
+    <div class="row bg-grey-10 heat-container" @mousedown="drawHeatMap">
     </div>
-    <div class="row">
-      <p>
-        Lorem
-      </p>
+    <div class="col bg-grey-5">
+      <q-btn 
+        class="save-button q-mt-md" 
+        size="12px" 
+        @click="storeImage" 
+        unelevated 
+        rounded 
+        color="secondary" 
+        label="Salvar Mapa" 
+        icon="save"
+      />
+      <q-btn 
+        class="save-button q-mt-md" 
+        size="12px" 
+        @click="storeImage" 
+        unelevated 
+        rounded 
+        color="secondary" 
+        label="Armazenar" 
+        icon="save"
+      />
     </div>
   </q-page>
 </template>
@@ -54,6 +70,11 @@ export default {
 
 <style>
 .heat-container{
-  width: 75%;
+  width: 70%;
+}
+
+.save-button{
+  flex-direction: end; 
+  margin-left: 1.5em;
 }
 </style>

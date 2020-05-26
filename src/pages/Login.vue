@@ -28,24 +28,25 @@ export default {
   },
 
   mounted () {
-    this.goToMainPanel()
+    //this.goToMainPanel()
   },
 
   methods: {
-    goToSignUp () {
+    goToSignUp() {
       this.$router.push({
         name: 'sign-up'
       })
     },
 
-    goToMainPanel () {
+    goToMainPanel() {
       this.$router.push({
         name: 'main'
       })
     },
 
-    login () {
+    login() {
       console.log(this.doctor)
+      this.goToMainPanel()
     }
   }
 }
