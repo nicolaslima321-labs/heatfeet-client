@@ -28,6 +28,9 @@
 </template>
 
 <script>
+import Reader from '../utils/Reader.js'
+
+const reader = new Reader()
 const heatmapInstance = require('heatmap.js')
 let heatmap
 
@@ -41,6 +44,8 @@ export default {
   },
 
   mounted () {
+    reader.processLineByLineFrom()
+
     heatmap = heatmapInstance.create({
       "container": document.querySelector(".heat-container"),
       "radius" : 50,
