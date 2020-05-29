@@ -1,17 +1,16 @@
 <template>
   <q-page class="flex bg-grey-11 ">
-    <div class="row bg-grey-10 heat-container" @mousedown="drawHeatMap">
+    <div class="row bg-grey-10 heat-container" @mousemove="drawHeatMap">
     </div>
     <div class="col bg-grey-3">
       <div style="margin: 1em 0 0 1em" class="text-h5">
         Dados do Paciente:
       </div>
-      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Nome"/>
-      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Idade"/>
-      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Sexo"/>
-      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Tamanho do Calçado"/>
-      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Anotações"/>
-      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Observações"/>
+      <q-input class="feet-input q-mt-md" rounded outlined v-model="patient.name" label="Nome"/>
+      <q-input class="feet-input q-mt-md" rounded outlined v-model="patient.age" label="Idade"/>
+      <q-input class="feet-input q-mt-md" rounded outlined v-model="patient.sex" label="Sexo"/>
+      <q-input class="feet-input q-mt-md" rounded outlined v-model="patient.feetSize" label="Tamanho do Calçado"/>
+      <q-input class="feet-input q-mt-md" rounded outlined v-model="patient.notes" label="Observações"/>
       <q-btn 
         class="save-button q-mt-md" 
         size="12px" 
@@ -39,7 +38,11 @@ export default {
   data() {
     return {
       user: false,
-      feet: {
+      patient: {
+        name: '',
+        age: '',
+        sex: '',
+        feetSize: '',
         notes: ''
       }
     }
