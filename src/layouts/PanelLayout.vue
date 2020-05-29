@@ -8,9 +8,8 @@
         inline-label
         class="bg-teal text-white shadow-2"
       >
-        <q-tab name="mails" icon="mail" label="Mails" />
-        <q-tab name="alarms" icon="alarm" label="Alarms" />
-        <q-tab name="movies" icon="movie" label="Movies" />
+        <q-tab name="panel" icon="assignment" label="Painel Principal" />
+        <q-tab name="config" icon="settings" label="Configurações" />
       </q-tabs>
     </q-header>
 
@@ -26,7 +25,7 @@ export default {
 
   data () {
     return {
-      tab: 'mails'
+      tab: 'panel'
     }
   }
 }

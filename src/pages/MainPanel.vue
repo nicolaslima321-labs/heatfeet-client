@@ -2,7 +2,16 @@
   <q-page class="flex bg-grey-11 ">
     <div class="row bg-grey-10 heat-container" @mousedown="drawHeatMap">
     </div>
-    <div class="col bg-grey-5">
+    <div class="col bg-grey-3">
+      <div style="margin: 1em 0 0 1em" class="text-h5">
+        Dados do Paciente:
+      </div>
+      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Nome"/>
+      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Idade"/>
+      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Sexo"/>
+      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Tamanho do Calçado"/>
+      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Anotações"/>
+      <q-input class="feet-input q-mt-md" rounded outlined v-model="feet.notes" label="Observações"/>
       <q-btn 
         class="save-button q-mt-md" 
         size="12px" 
@@ -10,17 +19,7 @@
         unelevated 
         rounded 
         color="secondary" 
-        label="Salvar Mapa" 
-        icon="save"
-      />
-      <q-btn 
-        class="save-button q-mt-md" 
-        size="12px" 
-        @click="storeImage" 
-        unelevated 
-        rounded 
-        color="secondary" 
-        label="Armazenar" 
+        label="Salvar Imagem" 
         icon="save"
       />
     </div>
@@ -39,7 +38,10 @@ export default {
 
   data() {
     return {
-      user: false
+      user: false,
+      feet: {
+        notes: ''
+      }
     }
   },
 
@@ -68,14 +70,24 @@ export default {
       });
 
       console.log(heatmap)
+    },
+
+    storeImage() {
+      console.log('teste')
     }
+
   }
 }
 </script>
 
 <style>
 .heat-container{
-  width: 70%;
+  min-width: 70%;
+}
+
+.feet-input{
+  width: 80%;
+  margin-left: 1em;
 }
 
 .save-button{

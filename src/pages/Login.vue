@@ -3,7 +3,7 @@
       <div class="col-xl">
         <div class="text-h4">
           HeatFeet
-          <q-badge align="top">beta</q-badge>
+          <q-badge align="top">alpha</q-badge>
         </div>
         <q-input class="q-mt-md" rounded outlined v-model="doctor.email" label="Email"/>
         <q-input class="q-mt-md" rounded outlined v-model="doctor.password" label="Senha"/>
