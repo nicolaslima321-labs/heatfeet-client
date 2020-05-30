@@ -4,7 +4,7 @@ HeatFeet Client Application, is the front-end strage of HeatFeet project, that's
 
 The software will have the data provided from an electronic platform with an Arduino microcontroller, thus collecting, with sensors, the stride steps, as well as the force exerted on those strands. The result is something like that:
 
-![Main Panel](./HeatFeet Main Panel.jpeg?raw=true "HeatFeet Main Panel")
+![Main Panel](./HeatFeet Main Panel.jpeg "HeatFeet Main Panel")
 
 To install the project, you must follow these steps:
 
