@@ -19,7 +19,8 @@
     "cylon-i2c": "^0.26.1",
     "heatmap.js": "^2.0.5",
     "line-reader": "^0.4.0",
-    "quasar": "^1.9.10"
+    "quasar": "^1.9.10",
+    "serialport": "^9.0.0"
   },
   "devDependencies": {
     "@quasar/app": "^1.0.0",
