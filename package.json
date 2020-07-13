@@ -13,6 +13,10 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^0.18.1",
+    "cylon": "^1.3.0",
+    "cylon-firmata": "^0.24.0",
+    "cylon-gpio": "^0.30.1",
+    "cylon-i2c": "^0.26.1",
     "heatmap.js": "^2.0.5",
     "line-reader": "^0.4.0",
     "quasar": "^1.9.10"
