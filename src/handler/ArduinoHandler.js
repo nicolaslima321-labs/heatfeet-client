@@ -1,4 +1,4 @@
-import feetProps from './FeetDataHandler'
+let feetProps = require('./FeetDataHandler')
 
 var OS = require('os');
 
@@ -13,17 +13,19 @@ const port = new ArduinoBoard((isWindows ? 'COM4' : '/dev/ttyACM0'));
 
 const parser = new Readline();
 
-port.pipe(parser);
+// port.pipe(parser);
 
-parser.on('data', (sensors) => {
-  console.log("Received: " + sensors);
-  var ldrValue = sensors.split(':');
-  console.log("Intensity: " + ldrValue[0]);
+// parser.on('data', (sensors) => {
+//   console.log("Received: " + sensors);
+//   var ldrValue = sensors.split(':');
+//   console.log("Intensity: " + ldrValue[0]);
 
-  feetProps.push({
-    X: 0,
-    y: 0,
-    Intensity: ldrValue[0]
-  })
-  
-})
+//   feetProps.push([0, 0, ldrValue])
+
+//   console.log(feetProps)
+// })
+
+module.exports = {
+  port,
+  parser
+}
