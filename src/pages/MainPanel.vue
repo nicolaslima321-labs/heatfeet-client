@@ -27,7 +27,11 @@
 
 <script>
 import Reader from '../utils/Reader.js'
+import eventsBus from '../events/eventsBus.js'
 
+const log = require('electron-log')
+log.transports.file.level = 'info'
+log.transports.file.file = 'Heatfeet.log'
 const reader = new Reader()
 const heatmapInstance = require('heatmap.js')
 let heatmap
@@ -44,11 +48,20 @@ export default {
         sex: '',
         feetSize: '',
         notes: ''
-      }
+      },
+      arduino: {
+        board: null,
+        readLine: null,
+        port: null,
+        parser: null
+      },
+      feetProps: []
     }
   },
 
   mounted () {
+    console.log("MOUNTED")
+
     reader.processLineByLineFrom()
 
     heatmap = heatmapInstance.create({
@@ -61,15 +74,18 @@ export default {
       }
     })
 
+    console.log("ABOUT TO INITIALIZE ARDUINO")
+    this.initializesArduino()
+
     console.log('mounted')
   },
 
   methods: {
-    drawHeatMap(e) {
+    drawHeatMap(feet) {
       heatmap.addData({
-        x: e.layerX,
-        y: e.layerY,
-        value: 0.9,
+        x: feet.x,
+        y: feet.y,
+        value: feet.intensity / (feet.intensity + 1),
       });
 
       console.log(heatmap)
@@ -77,6 +93,34 @@ export default {
 
     storeImage() {
       console.log('teste')
+      console.log("ABOUT TO INITIALIZE handleFeetSensor")
+      this.handleFeetSensor()
+      console.log(this.feetProps)
+    },
+
+    initializesArduino() {
+      console.log("Initializing")
+      var OS = require('os');
+      var isWindows = OS.platform().includes('win32') || OS.platform().includes('win64')
+      this.arduino.board = require('serialport');
+      this.arduino.readLine = ArduinoBoard.parsers.Readline;
+      // Be careful with Windows Hosts
+      this.arduino.port = new ArduinoBoard((isWindows ? 'COM4' : '/dev/ttyACM0'));
+      this.arduino.parser = new Readline();
+      console.log("Initialized")
+    },
+
+    handleFeetSensor() {
+      console.log("Handling with feetSensors")
+      this.arduino.port.pipe(this.arduino.parser);
+
+      this.arduino.parser.on('data', (sensors) => {
+        console.log("Received: " + sensors);
+        var ldrValue = sensors.split(':');
+        console.log("Intensity: " + ldrValue[0]);
+        this.feetProps.push([0, 0, ldrValue])
+        console.log(this.feetProps)
+      })
     }
 
   }

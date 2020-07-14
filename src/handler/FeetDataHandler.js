@@ -1,3 +1,5 @@
+let log = require('./LogHandler')
+
 let arduinoInstance = require("./ArduinoHandler")
 
 let feetProps = []
@@ -11,6 +13,7 @@ arduinoInstance.parser.on('data', (sensors) => {
 
   feetProps.push([0, 0, ldrValue])
 
+  eventBus.$emit('stop-watch')
   console.log(feetProps)
 })
 
