@@ -28,7 +28,9 @@
 <script>
 import eventsBus from '../events/eventsBus.js'
 import log from '../Classes/handlers/LogHandler.js'
+import WatchHandler from '../Classes/handlers/WatchHandler.js'
 
+const BASEPATH = require('path').resolve()
 const __CLASS__ = "MainPanel"
 
 const heatmapInstance = require('heatmap.js')
@@ -48,12 +50,17 @@ export default {
         notes: ''
       },
       arduino: null,
-      feetProps: []
+      feetProps: [],
+      watcherInstance: new WatchHandler(BASEPATH)
     }
   },
 
   mounted () {
     log.info(`[${__CLASS__}@mounted]: Mounting..`)
+
+    eventsBus.$on('new-value', function(){
+      this.handleNewValue()
+    })
 
     heatmap = heatmapInstance.create({
       "container": document.querySelector(".heat-container"),
@@ -77,6 +84,10 @@ export default {
       });
 
       console.log(heatmap)
+    },
+    
+    handleNewValue() {
+      this.watcherInstance.feetProps
     },
 
     storeImage() {
