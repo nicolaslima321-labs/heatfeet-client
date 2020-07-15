@@ -1,31 +1,22 @@
-let feetProps = require('./FeetDataHandler')
+let ArduinoFirmata = require('arduino-firmata')
+let log = require('./LogHandler')
 
+log.info("[ArduinoHandler@]: Initializing")
 var OS = require('os');
-
 var isWindows = OS.platform().includes('win32') || OS.platform().includes('win64')
 
-const ArduinoBoard = require('serialport');
+let arduino = new ArduinoFirmata()
 
-const Readline = ArduinoBoard.parsers.Readline;
+arduino.connect() // use default arduino
+arduino.connect((isWindows ? 'COM4' : '/dev/ttyACM0'))
 
-// Be careful with Windows Hosts
-const port = new ArduinoBoard((isWindows ? 'COM4' : '/dev/ttyACM0'));
+arduino.on('connect', function(){
 
-const parser = new Readline();
+  log.info("[ArduinoHandler@]: board version" + arduino.boardVersion)
+  log.info("[ArduinoHandler@]: " + arduino)
 
-// port.pipe(parser);
+})
 
-// parser.on('data', (sensors) => {
-//   console.log("Received: " + sensors);
-//   var ldrValue = sensors.split(':');
-//   console.log("Intensity: " + ldrValue[0]);
+log.info("[ArduinoHandler@]: Initialized")
 
-//   feetProps.push([0, 0, ldrValue])
-
-//   console.log(feetProps)
-// })
-
-module.exports = {
-  port,
-  parser
-}
+exports.module = arduino

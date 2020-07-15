@@ -1,20 +1,9 @@
 let log = require('./LogHandler')
+let arduino = require('./ArduinoHandler')
 
-let arduinoInstance = require("./ArduinoHandler")
+log.info("Handling with feetSensors")
 
-let feetProps = []
 
-arduinoInstance.port.pipe(arduinoInstance.parser);
-
-arduinoInstance.parser.on('data', (sensors) => {
-  console.log("Received: " + sensors);
-  var ldrValue = sensors.split(':');
-  console.log("Intensity: " + ldrValue[0]);
-
-  feetProps.push([0, 0, ldrValue])
-
-  eventBus.$emit('stop-watch')
-  console.log(feetProps)
+exports.modules = arduino.on('analogChange', function(e) {
+  log.info("pin" + e.pin + " : " + e.old_value + " -> " + e.value)
 })
-
-module.exports = feetProps

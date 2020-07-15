@@ -30,10 +30,12 @@ import Reader from '../utils/Reader.js'
 import eventsBus from '../events/eventsBus.js'
 
 const log = require('electron-log')
+const heatmapInstance = require('heatmap.js')
+
 log.transports.file.level = 'info'
 log.transports.file.file = 'Heatfeet.log'
 const reader = new Reader()
-const heatmapInstance = require('heatmap.js')
+
 let heatmap
 
 export default {
@@ -49,12 +51,7 @@ export default {
         feetSize: '',
         notes: ''
       },
-      arduino: {
-        board: null,
-        readLine: null,
-        port: null,
-        parser: null
-      },
+      arduino: null,
       feetProps: []
     }
   },
@@ -85,7 +82,7 @@ export default {
       heatmap.addData({
         x: feet.x,
         y: feet.y,
-        value: feet.intensity / (feet.intensity + 1),
+        value: this.getFeetIntensityCoefficient(feet),
       });
 
       console.log(heatmap)
@@ -99,30 +96,12 @@ export default {
     },
 
     initializesArduino() {
-      console.log("Initializing")
-      var OS = require('os');
-      var isWindows = OS.platform().includes('win32') || OS.platform().includes('win64')
-      this.arduino.board = require('serialport');
-      this.arduino.readLine = ArduinoBoard.parsers.Readline;
-      // Be careful with Windows Hosts
-      this.arduino.port = new ArduinoBoard((isWindows ? 'COM4' : '/dev/ttyACM0'));
-      this.arduino.parser = new Readline();
-      console.log("Initialized")
+      this.arduino = require("../handler/FeetDataHandler.js")
     },
 
-    handleFeetSensor() {
-      console.log("Handling with feetSensors")
-      this.arduino.port.pipe(this.arduino.parser);
-
-      this.arduino.parser.on('data', (sensors) => {
-        console.log("Received: " + sensors);
-        var ldrValue = sensors.split(':');
-        console.log("Intensity: " + ldrValue[0]);
-        this.feetProps.push([0, 0, ldrValue])
-        console.log(this.feetProps)
-      })
+    getFeetIntensityCoefficient(feet) {
+      return feet.intensity / (feet.intensity + 1)
     }
-
   }
 }
 </script>
