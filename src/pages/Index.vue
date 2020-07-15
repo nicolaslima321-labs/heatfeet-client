@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div class="container" id="teste" name="teste">
-      dsasdsdadsasaddsa
+      Index
     </div>
     <p id="lorem" name="lorem">oi</p>
     <img
