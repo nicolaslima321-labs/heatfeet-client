@@ -26,16 +26,12 @@
 </template>
 
 <script>
-import Reader from '../utils/Reader.js'
 import eventsBus from '../events/eventsBus.js'
+import log from '../Classes/handlers/LogHandler.js'
 
-const log = require('electron-log')
+const __CLASS__ = "MainPanel"
+
 const heatmapInstance = require('heatmap.js')
-
-log.transports.file.level = 'info'
-log.transports.file.file = 'Heatfeet.log'
-const reader = new Reader()
-
 let heatmap
 
 export default {
@@ -57,9 +53,7 @@ export default {
   },
 
   mounted () {
-    console.log("MOUNTED")
-
-    reader.processLineByLineFrom()
+    log.info(`[${__CLASS__}@mounted]: Mounting..`)
 
     heatmap = heatmapInstance.create({
       "container": document.querySelector(".heat-container"),
@@ -70,15 +64,12 @@ export default {
         '1.0': '#FA0000'
       }
     })
-
-    console.log("ABOUT TO INITIALIZE ARDUINO")
-    this.initializesArduino()
-
-    console.log('mounted')
   },
 
   methods: {
     drawHeatMap(feet) {
+      log.info(`[${__CLASS__}@drawHeatMap]: Drawing HeatMap..`)
+
       heatmap.addData({
         x: feet.x,
         y: feet.y,
@@ -89,14 +80,7 @@ export default {
     },
 
     storeImage() {
-      console.log('teste')
-      console.log("ABOUT TO INITIALIZE handleFeetSensor")
-      this.handleFeetSensor()
-      console.log(this.feetProps)
-    },
-
-    initializesArduino() {
-      this.arduino = require("../handler/FeetDataHandler.js")
+      console.log("Im not done :(")
     },
 
     getFeetIntensityCoefficient(feet) {
